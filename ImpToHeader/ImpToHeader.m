@@ -17,8 +17,7 @@ static ImpToHeader *sharedPlugin;
 
 @implementation ImpToHeader
 
-+ (void)pluginDidLoad:(NSBundle *)plugin
-{
++ (void)pluginDidLoad:(NSBundle *)plugin {
     static dispatch_once_t onceToken;
     NSString *currentApplicationName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
     if ([currentApplicationName isEqual:@"Xcode"]) {
@@ -28,13 +27,11 @@ static ImpToHeader *sharedPlugin;
     }
 }
 
-+ (instancetype)sharedPlugin
-{
++ (instancetype)sharedPlugin {
     return sharedPlugin;
 }
 
-- (id)initWithBundle:(NSBundle *)plugin
-{
+- (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
         // reference to plugin's bundle, for resource access
         self.bundle = plugin;
@@ -45,7 +42,7 @@ static ImpToHeader *sharedPlugin;
         NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Edit"];
         if (menuItem) {
             [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
-            NSMenuItem *actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Do Action" action:@selector(doMenuAction) keyEquivalent:@""];
+            NSMenuItem *actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"ImpToHeader" action:@selector(doMenuAction) keyEquivalent:@""];
             [actionMenuItem setTarget:self];
             [[menuItem submenu] addItem:actionMenuItem];
         }
@@ -54,11 +51,7 @@ static ImpToHeader *sharedPlugin;
 }
 
 // Sample Action, for menu item:
-- (void)doMenuAction
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Hello, World"];
-    [alert runModal];
+- (void)doMenuAction {
 }
 
 - (void)dealloc
